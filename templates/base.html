@@ -1,0 +1,33 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'global.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+
+<header>
+    <a class="header" href="/">
+        <div class="header">
+            <div class="header" id="main">Colearn</div>
+            <div class="header" id="subtext">Learn with peers like you!</div>
+        </div>
+    </a>
+</header>
+
+<div id="navbar">
+    <ul>
+        <li class="button"><a href="/">Home</a></li>
+        {% if user.is_authenticated %}
+        <li class="button float-right"><a href="{% url 'profile_page_url' %}">{{ user.username }}</a></li>
+        <li class="button float-right"><a href="{% url 'logout' %}">Log Out</a></li>
+        {% else %}
+        <li class="button float-right"><a href="{% url 'login' %}">Log In</a></li>
+        <li class="button float-right"><a href="{% url 'signup_page_url' %}">Sign Up</a></li>
+        {% endif %}
+        <li class="float-right">
+            <form action="/search" method="get">
+                <input type="search" name="q">
+                <input type="submit" value="Search">
+            </form>
+        </li>
+    </ul>
+</div>
+
+{% block content%} {% endblock content%}
